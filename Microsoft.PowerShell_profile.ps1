@@ -1,4 +1,4 @@
-Set-PSReadLineKeyHandler -Chord "Tab" -Function AcceptLine
+Set-PSReadLineKeyHandler -Chord "Tab" -Function AcceptSuggestion
 Set-PSReadLineKeyHandler -Chord "RightArrow" -Function ForwardWord
 Set-PSReadlineKeyHandler -Key UpArrow -Function HistorySearchBackward
 Set-PSReadlineKeyHandler -Key DownArrow -Function HistorySearchForward
