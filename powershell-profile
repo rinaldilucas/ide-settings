@@ -3,33 +3,31 @@ Set-PSReadLineKeyHandler -Chord "RightArrow" -Function ForwardWord
 Set-PSReadlineKeyHandler -Key UpArrow -Function HistorySearchBackward
 Set-PSReadlineKeyHandler -Key DownArrow -Function HistorySearchForward
 Set-PSReadLineOption -Colors @{ "Command" = '#1b80a7' }
-
-function firstSave([string]$branchId) {
+function save ([string]$branchId = "") {
     $currentDir = Get-Location
     $rootFolder = (Get-Item -Path ".").BaseName
+    $currentBranch = git rev-parse --abbrev-ref HEAD
 
     cd ../../
-    git add .
-    git stash -m ${branchId}
-    git checkout master
-    git pull
-    git checkout -b ${branchId}
-    git stash apply 0
-    git add .
-    git commit -m "#${branchId} - client/${rootFolder}"
-    git push origin ${branchId}
-    git checkout master
-    Set-Location $currentDir
-}
-function save {
-    $currentDir = Get-Location
-    $branchId = git rev-parse --abbrev-ref HEAD
-    $rootFolder = (Get-Item -Path ".").BaseName
 
-    cd ../../
-    git add .
-    git commit -m "#${branchId} - client/${rootFolder}"
-    git push origin $branchId
+    if ($branchId) {
+        git add .
+        git stash -m "$branchId"
+        git checkout master
+        git pull
+        git checkout -b $branchId
+        git stash apply 0
+        git add .
+        git commit -m "#${branchId} - client/${rootFolder}"
+        git push origin $branchId
+        git checkout master
+    }
+    else {
+        git add .
+        git commit -m "#${currentBranch} - client/${rootFolder}"
+        git push origin $currentBranch
+    }
+
     Set-Location $currentDir
 }
 function libpubdocs {
