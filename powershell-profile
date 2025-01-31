@@ -8,7 +8,13 @@ function save ([string]$branchId = "") {
     $rootFolder = (Get-Item -Path ".").BaseName
     $currentBranch = git rev-parse --abbrev-ref HEAD
 
-    cd ../../
+    if ($rootFolder -eq "libs-v2") {
+        $levelsUp = "../"
+    } else {
+        $levelsUp = "../../"
+    }
+
+    cd $levelsUp
 
     if ($branchId) {
         git add .
