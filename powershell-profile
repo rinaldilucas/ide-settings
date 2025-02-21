@@ -52,7 +52,7 @@ function fetch { git fetch -p }
 function master { git checkout master && git pull }
 function checkout([string]$branchId) { git checkout ${branchId} }  
 function branch([string]$branchId) { git checkout master && git pull origin && git checkout -b $branchId }  
-function savedb { git add . && git commit -m "$(Get-Date)" && git push }  
+function savenow { git add . && git commit -m "$(Get-Date)" && git push }  
 function oldlibpub { npm run patch && npm run build && npm run publish }
 function oldlibinst { npm i @forlogic/qex@latest }
 function init { git commit --allow-empty -n -m "misc: init repo" }
