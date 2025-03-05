@@ -2,7 +2,16 @@ Set-PSReadLineKeyHandler -Chord "Tab" -Function AcceptSuggestion
 Set-PSReadLineKeyHandler -Chord "RightArrow" -Function ForwardWord
 Set-PSReadlineKeyHandler -Key UpArrow -Function HistorySearchBackward
 Set-PSReadlineKeyHandler -Key DownArrow -Function HistorySearchForward
-Set-PSReadLineOption -Colors @{ "Command" = '#1b80a7' }
+Set-PSReadLineOption -Colors @{
+    Command            = "Green"      # Valid commands
+    Parameter          = "Gray"       # Parameters like -Path
+    String             = "DarkCyan"   # Quoted strings
+    Operator           = "Magenta"    # Operators like | or >
+    Variable           = "Yellow"     # Variables like $env:Path
+    Error              = "Red"        # Syntax errors
+}
+Set-PSReadLineOption -PredictionSource History
+
 function save ([string]$branchId = "") {
     $currentDir = Get-Location
     $rootFolder = (Get-Item -Path ".").BaseName
@@ -56,3 +65,6 @@ function savenow { git add . && git commit -m "$(Get-Date)" && git push }
 function oldlibpub { npm run patch && npm run build && npm run publish }
 function oldlibinst { npm i @forlogic/qex@latest }
 function init { git commit --allow-empty -n -m "misc: init repo" }
+
+function up { . $PROFILE } 
+oh-my-posh init pwsh --config "$env:POSH_THEMES_PATH\powerlevel10k_lean.omp.json" | Invoke-Expression
