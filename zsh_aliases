@@ -33,6 +33,16 @@ function run_docker() {
     sudo service docker start
 }
 
+# Open .zshrc file
+function open_env() {
+    code ~/.zshrc
+}
+
+# Open .zshrc_alias file
+function open_aliases() {
+    code ~/.zshrc_aliases
+}
+
 # Copies the compiled history project to the folder
 function copy_katana() {
     cd ~/code/SoftExpertExcellenceSuiteV3/JavaSuiteSrc/startup/target/katana-distribution && sudo cp -rf ./ ~/code/SoftExpertExcellenceSuiteV3/System/tools/katana/
