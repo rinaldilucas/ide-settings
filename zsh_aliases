@@ -1,0 +1,276 @@
+# Inicia o docker
+function ds() {
+    sudo service docker start
+}
+
+# Caminho do projeto
+function v3() {
+	cd ~/code/SoftExpertExcellenceSuiteV3/
+}
+
+# Vai para a pasta reactorCmps
+function cmps() {
+    v3;
+    cd ./System/web/wwwroot/ui/reactorCmps/
+}
+
+# Vai para a pasta machete
+function machete() {
+	v3;
+	cd ./System/machete/
+}
+
+# Vai para a pasta default do projeto
+function default() {
+	v3;
+	cd ./composes/default/
+}
+
+# Executa os testes de unidades do react sem gerar arquivo de code coverage
+function rtdd(){
+	export CHROME_BIN='/mnt/c/Program Files/Google/Chrome/Application/chrome.exe';
+    cmps;
+    npm run tdd --path=$1
+}
+
+# Executa os testes de unidades do react e gerar arquivo de code coverage
+function rtest(){
+	export CHROME_BIN='/mnt/c/Program Files/Google/Chrome/Application/chrome.exe';
+    cmps;
+    npm run test --path=$1
+}
+
+# Executa os testes de unidades do baseclass
+function btest() {
+    docker exec -w /usr/local/se/web/ -it se-baseclass /bin/bash -c "XDEBUG_MODE=coverage php /tmp/phpunit.phar $1"
+}
+
+# Executa os testes de unidades do baseclass da pasta GRC
+function grctest() {
+    docker exec -w /usr/local/se/web/ -it se-baseclass /bin/bash -c "XDEBUG_MODE=coverage php /tmp/phpunit.phar tests/include/exp/grc"
+}
+
+# Executa os testes de unidades do baseclass da pasta Risco
+function risktest() {
+    docker exec -w /usr/local/se/web/ -it se-baseclass /bin/bash -c "XDEBUG_MODE=coverage php /tmp/phpunit.phar tests/include/exp/risk"
+}
+
+# Executa os testes de unidades do baseclass da pasta Requisito
+function reqtest() {
+    docker exec -w /usr/local/se/web/ -it se-baseclass /bin/bash -c "XDEBUG_MODE=coverage php /tmp/phpunit.phar tests/include/exp/requirement"
+}
+
+# Executa os testes de unidades do machete
+function mtest() {
+	machete;
+    bin/remote bin/test $1
+}
+
+# Executa os testes de integracao do machete
+function integration() {
+	machete;
+    bin/remote bin/integration $1
+}
+
+# Limpa o cache do machete
+function cmc(){
+	machete;
+    bin/remote bin/clear-cache
+}
+
+# Executa o linter do machete
+function mlint() {
+	machete;
+    bin/remote bin/lint
+}
+
+# Executa o linter do react
+function rlint(){
+	cmps;
+    npm run lint --path=$1
+}
+
+# Compila o react
+function dev(){
+	cmps;
+	npm run tokens;
+	npm run dev --path=risk,generic,requirement,workspace
+}
+
+# Compila o reacit com componentes específicos
+function devcomps(){
+	cmps;
+	npm run tokens;
+	npm run dev --path=generic,workspace,$1
+}
+
+# Equaliza as bases de dados
+function equalizer(){
+	cd ~/code/docker-db;
+	bash common/equalize.sh;
+}
+
+# Inicia o sistema
+function start(){
+	default;
+    ./start.sh "" false true
+}
+
+# Para o sistema
+function stop(){
+	default;
+    ./stop.sh
+}
+
+# Limpa os sub repositorios
+function sclean(){
+	perm;
+	v3;
+    ./Scripts/subs clean
+}
+
+# Atualiza os sub repositorios
+function supdate(){
+	v3;
+    ./Scripts/subs update
+}
+
+# Inicia os sub repositorios
+function sinit(){
+	v3;
+    ./Scripts/subs init
+}
+
+# Inicia os sub repositorios
+function initSubs() {
+    v3;
+    git submodule update --init System/platform;
+    git submodule update --init System/tools;
+    git submodule update --init System/web/wwwroot/document/app;
+    git submodule update --init System/web/wwwroot/documentation;
+    git submodule update --init System/web/wwwroot/generic/app;
+    git submodule update --init System/web/wwwroot/ui/desktop/lite/dist;
+    git submodule update --init System/web/wwwroot/ui/reactor/dist;
+    git submodule update --init System/web/wwwroot/ui/reactor2/dist;
+    git submodule update --init System/web/wwwroot/ui/reactorCmps/dist;
+    git submodule update --init System/web/wwwroot/common/images;
+    git submodule update --init System/machete/dist;
+    git submodule update --init System/web/include/baseclass/dist;
+}
+
+# Limpa os sub repos
+function cleanup() {
+    v3;
+    sudo ./Scripts/subs clean;
+    echo -e "\n=====> Update submodule(s)\n";
+    echo -e "\n=====> Update System/platform\n"
+    git submodule update --depth=1 System/platform;
+    echo -e "\n=====> Update System/tools\n"
+    git submodule update --depth=1 System/tools;
+    echo -e "\n=====> Update System/web/wwwroot/document/app\n"
+    git submodule update --depth=1 System/web/wwwroot/document/app;
+    echo -e "\n=====> Update System/web/wwwroot/documentation\n"
+    git submodule update --depth=1 System/web/wwwroot/documentation;
+    echo -e "\n=====> Update System/web/wwwroot/generic/app\n"
+    git submodule update --depth=1 System/web/wwwroot/generic/app;
+    echo -e "\n=====> Update System/web/wwwroot/ui/desktop/lite/dist\n"
+    git submodule update --depth=1 System/web/wwwroot/ui/desktop/lite/dist;
+    echo -e "\n=====> Update System/web/wwwroot/ui/reactor/dist\n"
+    git submodule update --depth=1 System/web/wwwroot/ui/reactor/dist;
+    echo -e "\n=====> Update System/web/wwwroot/ui/reactor2/dist\n"
+    git submodule update --depth=1 System/web/wwwroot/ui/reactor2/dist;
+    echo -e "\n=====> Update System/web/wwwroot/ui/reactorCmps/dist\n"
+    git submodule update --depth=1 System/web/wwwroot/ui/reactorCmps/dist;
+    echo -e "\n=====> Update System/web/wwwroot/common/images\n"
+    git submodule update --depth=1 System/web/wwwroot/common/images;
+    echo -e "\n=====> Update System/machete/dist\n"
+    git submodule update --depth=1 System/machete/dist;
+    echo -e "\n=====> Update System/web/include/baseclass/dist\n"
+    git submodule update --depth=1 System/web/include/baseclass/dist;
+    echo -e "\n=====> Submodule(s) updated\n"
+    echo -e "\n=====> Status\n"
+    git status
+}
+
+# Compila o projeto em java do historico
+function mvn_history() {
+      cd ~/code/SoftExpertExcellenceSuiteV3/JavaSuiteSrc/suite/workspace/workspace-history/ && mvn clean install \
+      && cd ~/code/SoftExpertExcellenceSuiteV3/JavaSuiteSrc/startup/ && mvn clean install
+}
+
+# Copia o projeto compilado do historico para a pasta
+function copy_katana(){
+	cd ~/code/SoftExpertExcellenceSuiteV3/JavaSuiteSrc/startup/target/katana-distribution && sudo cp -rf ./ ~/code/SoftExpertExcellenceSuiteV3/System/tools/katana/
+}
+
+# Atualiza o sources
+function up(){
+	source ~/.zshrc
+}
+
+# Sobe o sistema na base SqlServer
+function sql(){
+    cp ~/code/docker-db/sqlserver/database_config.xml ~/code/SoftExpertExcellenceSuiteV3/System/conf/
+    cd ~/code/docker-db && bash mssql/scripts/stop.sh
+    cd ~/code/docker-db && bash mssql/scripts/start.sh
+    start;
+}
+
+# Sobe o sistema na base Oracle
+function ora(){
+    cp ~/code/docker-db/oracle/database_config.xml ~/code/SoftExpertExcellenceSuiteV3/System/conf/
+    cd ~/code/docker-db && bash oracle/scripts/stop.sh
+    cd ~/code/docker-db && bash oracle/scripts/start.sh
+    start;
+}
+
+# Sobe o sistema na base Postgres
+function pg(){
+    cp ~/code/docker-db/postgres/database_config.xml ~/code/SoftExpertExcellenceSuiteV3/System/conf/
+    cd ~/code/docker-db && bash postgres/scripts/stop.sh
+    cd ~/code/docker-db && bash postgres/scripts/start.sh
+    start;
+}
+
+# Backend Chatbot
+function chatbotbackend() {
+	cd ~/code/SoftExpertExcellenceSuiteV3/System/web/include/exp/pmapping/chatbot
+}
+
+# Backend FDA
+function fdabackend() {
+	cd ~/code/SoftExpertExcellenceSuiteV3/System/web/include/exp/pmapping/processmodeler
+}
+
+# Dev FDA Front
+function devfda() {
+	cmps
+	npm run dev --path=process/ProcessModeler
+}
+
+# Show all running containers
+function allc() {
+	docker ps -a --format "table {{.Names}}\t{{.Status}}"
+}
+
+# Mostra todos os comandos disponíveis e suas descrições
+function help() {
+    echo "Lista de comandos disponíveis:"
+    echo "-----------------------------"
+    grep -B1 '^function' ~/.zsh_aliases | grep -v '^--' | while read -r line; do
+        if [[ "$line" =~ ^# ]]; then
+            desc="${line#\# }"
+        elif [[ "$line" =~ ^function ]]; then
+            # Extract function name more precisely
+            fname=$(echo "$line" | sed 's/function \([^ ]*\)().*/\1/')
+            if [[ -n "$desc" ]]; then
+                printf "  %-15s - %s\n" "$fname" "$desc"
+            else
+                printf "  %-15s - (sem descrição)\n" "$fname"
+            fi
+            desc=""
+        fi
+    done
+    echo "-----------------------------"
+    echo "Use cada comando diretamente no terminal (ex.: 'ds', 'v3', etc.)."
+}
