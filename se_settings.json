@@ -1,0 +1,167 @@
+{
+    // Editor Formatting and Code Style
+	"editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+        "source.organizeImports": "never"
+    },
+    "editor.detectIndentation": false,
+    "editor.foldingImportsByDefault": true,
+    "editor.fontFamily": "FiraCode Nerd Font",
+    "editor.fontLigatures": "'zero', 'cv27', 'cv30', 'cv31', 'ss03', 'ss04', 'ss05'",
+    "editor.fontSize": 13,
+    "editor.insertSpaces": false,
+    "editor.tabSize": 4,
+    "editor.rulers": [150],
+
+	// Default Formatters
+	"[javascriptreact]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"[javascript]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+
+	// Search and visibility
+	"search.exclude": {
+        "**/dist": true,
+        "**/node_modules": true,
+        "**/web.config": true,
+        "package-lock.json": true,
+    },
+	"files.exclude": {
+        "**/.git": true,
+        "**/bin": true,
+        "node_modules": true
+    },
+	"files.watcherExclude": {
+		"**/.git/objects/**": true,
+		"**/.git/subtree-cache/**": true,
+		"**/node_modules/*/**": true
+	},
+
+	// Prettier Configuration
+	"prettier.tabWidth": 4,
+	"prettier.useTabs": true,
+	"prettier.printWidth": 150,
+	"prettier.bracketSpacing": false,
+	"prettier.arrowParens": "always",
+	"prettier.embeddedLanguageFormatting": "auto",
+	"prettier.endOfLine": "auto",
+	"prettier.htmlWhitespaceSensitivity": "ignore",
+	"prettier.proseWrap": "preserve",
+	"prettier.quoteProps": "consistent",
+	"prettier.trailingComma": "none",
+	"prettier.singleQuote": true,
+
+    // Editor Interaction and Assistance
+    "editor.hover.delay": 1000,
+    "editor.hover.enabled": true,
+    "editor.inlineSuggest.enabled": true,
+    "editor.linkedEditing": true,
+    "editor.occurrencesHighlight": "off",
+    "editor.parameterHints.enabled": true,
+    "editor.quickSuggestionsDelay": 1000,
+    "editor.suggestSelection": "first",
+
+    // Editor Visuals and Navigation
+    "editor.renderLineHighlight": "gutter",
+    "editor.stickyScroll.enabled": false,
+
+    // File Explorer and File Handling
+    "explorer.confirmDelete": false,
+    "explorer.confirmDragAndDrop": false,
+    "explorer.confirmPasteNative": false,
+    "files.associations": {
+        "*.inc": "php",
+        "*.mcss": "scss"
+    },
+    "files.autoGuessEncoding": false,
+    "files.eol": "\n",
+    "files.insertFinalNewline": false,
+    "files.trimTrailingWhitespace": true,
+
+    // Git Integration
+    "git.autofetch": true,
+    "git.autoRepositoryDetection": false,
+    "git.confirmSync": false,
+    "git.decorations.enabled": false,
+    "git.detectSubmodules": false,
+    "git.enabled": true,
+    "git.enableSmartCommit": true,
+    "git.ignoredRepositories": ["ui"],
+    "git.ignoreLimitWarning": true,
+    "git.ignoreRebaseWarning": true,
+    "git.ignoreSubmodules": true,
+    "git.ignoreWindowsGit27Warning": true,
+    "git.openRepositoryInParentFolders": "always",
+    "gitlens.defaultDateFormat": "D/MM/YYYY, HH:m",
+    "gitlens.defaultDateShortFormat": "D/MM/YY",
+    "gitlens.defaultTimeFormat": "HH:m",
+    "gitlens.views.stashes.files.layout": "list",
+
+    // Language-Specific Settings
+    "emmet.triggerExpansionOnTab": true,
+    "javascript.suggest.autoImports": false,
+    "javascript.updateImportsOnFileMove.enabled": "never",
+    "typescript.preferences.importModuleSpecifier": "non-relative",
+    "typescript.updateImportsOnFileMove.enabled": "always",
+
+    // ESLint Configuration
+    "eslint.options": {
+        "overrideConfig": {
+            "rules": {
+                "import/no-extraneous-dependencies": "off",
+                "no-mixed-imports": 0,
+                "no-reactor2": 0,
+                "no-setoken": 0,
+                "no-window": 0
+            }
+        }
+    },
+    "eslint.validate": [
+        "typescript",
+        "typescriptreact",
+        "javascript",
+        "javascriptreact",
+        "json",
+        "jsonc",
+        "json5"
+    ],
+
+    // PHPUnit Testing
+    "phpunit.command": "docker exec -t -w /usr/local/se/web se-baseclass php",
+    "phpunit.docker.container": "se-baseclass",
+    "phpunit.paths": {
+        "${workspaceFolder}": "/usr/local/se/web/"
+    },
+    "phpunit.phpunit": "/tmp/phpunit.phar",
+
+    // Terminal and Environment
+    "terminal.integrated.defaultProfile.windows": "PowerShell",
+    "terminal.integrated.env.windows": {},
+    "terminal.integrated.persistentSessionReviveProcess": "never",
+    "termPreview.absolutePathToTermsRoot": "/root/code/SoftExpertExcellenceSuiteV3/System/web/include/language/LC_MESSAGES",
+    "termPreview.file": "{{LANGUAGE}}.utf-8.po",
+    "termPreview.languages": ["pt-br", "en-us"],
+
+    // Workbench and UI Customization
+	"material-icon-theme.activeIconPack": "angular_ngrx",
+    "window.zoomPerWindow": false,
+    "workbench.colorCustomizations": {
+        "statusBar.debuggingBackground": "#263238",
+        "statusBar.noFolderBackground": "#212121"
+    },
+    "workbench.colorTheme": "Default Dark Modern",
+    "workbench.editor.enablePreview": false,
+    "workbench.iconTheme": "material-icon-theme",
+    "workbench.layoutControl.enabled": false,
+	"workbench.startupEditor": "newUntitledFile",
+
+	// General Editor Behavior
+	"chat.commandCenter.enabled": false,
+    "debug.onTaskErrors": "abort",
+    "diffEditor.ignoreTrimWhitespace": false,
+	"diffEditor.renderSideBySide": true,
+	"window.zoomLevel": 1,
+	"security.workspace.trust.untrustedFiles": "open",
+}
