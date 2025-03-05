@@ -15,32 +15,32 @@ function help() {
             desc=""
         fi
     done
-    echo "---------------------------------------------------------------------------------------"    
+    echo "---------------------------------------------------------------------------------------"
 }
 
-# Refresh cli environment
+# Refresh CLI environment
 function up() {
-	source ~/.zshrc
+    source ~/.zshrc
 }
 
 # Show all running containers
 function show_containers() {
-	docker ps -a --format "table {{.Names}}\t{{.Status}}"
+    docker ps -a --format "table {{.Names}}\t{{.Status}}"
 }
 
-# Starts docker
+# Starts Docker
 function run_docker() {
     sudo service docker start
 }
 
-# Copies the history compiled project to the folder
+# Copies the compiled history project to the folder
 function copy_katana() {
-	cd ~/code/SoftExpertExcellenceSuiteV3/JavaSuiteSrc/startup/target/katana-distribution && sudo cp -rf ./ ~/code/SoftExpertExcellenceSuiteV3/System/tools/katana/
+    cd ~/code/SoftExpertExcellenceSuiteV3/JavaSuiteSrc/startup/target/katana-distribution && sudo cp -rf ./ ~/code/SoftExpertExcellenceSuiteV3/System/tools/katana/
 }
 
 # Go to v3 root folder
 function go_v3() {
-	cd ~/code/SoftExpertExcellenceSuiteV3/
+    cd ~/code/SoftExpertExcellenceSuiteV3/
 }
 
 # Go to reactor components
@@ -51,62 +51,61 @@ function go_reactor() {
 
 # Go to machete folder
 function go_machete() {
-	go_v3;
-	cd ./System/machete/
+    go_v3;
+    cd ./System/machete/
 }
 
 # Go to composes default folder
 function go_default() {
-	go_v3;
-	cd ./composes/default/
+    go_v3;
+    cd ./composes/default/
 }
 
 # Go to Chatbot backend
 function go_chatbot_backend() {
-	cd ~/code/SoftExpertExcellenceSuiteV3/System/web/include/exp/pmapping/chatbot
+    cd ~/code/SoftExpertExcellenceSuiteV3/System/web/include/exp/pmapping/chatbot
 }
 
 # Go to FDA backend
 function go_fda_backend() {
-	cd ~/code/SoftExpertExcellenceSuiteV3/System/web/include/exp/pmapping/processmodeler
+    cd ~/code/SoftExpertExcellenceSuiteV3/System/web/include/exp/pmapping/processmodeler
 }
 
-# Run react on development mode (risk, generic, requirement, workspace)
+# Run React in development mode (risk, generic, requirement, workspace)
 function dev_react() {
-	go_reactor;
-	npm run tokens;
-	npm run dev --path=risk,generic,requirement,workspace;
+    go_reactor;
+    npm run tokens;
+    npm run dev --path=risk,generic,requirement,workspace
 }
 
-# Run react on development mode with custom path
+# Run React in development mode with custom path
 function dev_react_custom() {
-	go_reactor;
-	npm run tokens;
-	npm run dev --path=generic,workspace,$1;
+    go_reactor;
+    npm run tokens;
+    npm run dev --path=generic,workspace,$1
 }
 
-# Run FDA react development
+# Run FDA React development
 function dev_fda() {
-	go_reactor;
-	npm run dev --path=process/ProcessModeler
+    go_reactor;
+    npm run dev --path=process/ProcessModeler
 }
 
-# Run maven history development
+# Run Maven history development
 function dev_maven_history() {
-    cd ~/code/SoftExpertExcellenceSuiteV3/JavaSuiteSrc/suite/workspace/workspace-history/ && mvn clean install \
-    && cd ~/code/SoftExpertExcellenceSuiteV3/JavaSuiteSrc/startup/ && mvn clean install
+    cd ~/code/SoftExpertExcellenceSuiteV3/JavaSuiteSrc/suite/workspace/workspace-history/ && mvn clean install && cd ~/code/SoftExpertExcellenceSuiteV3/JavaSuiteSrc/startup/ && mvn clean install
 }
 
-# Run react unit tests without coverage file
+# Run React unit tests without coverage file
 function run_react_tests_no_coverage() {
-	export CHROME_BIN='/mnt/c/Program Files/Google/Chrome/Application/chrome.exe';
+    export CHROME_BIN='/mnt/c/Program Files/Google/Chrome/Application/chrome.exe';
     go_reactor;
     npm run tdd --path=$1
 }
 
-# Run react unit tests with coverage file
+# Run React unit tests with coverage file
 function run_react_tests() {
-	export CHROME_BIN='/mnt/c/Program Files/Google/Chrome/Application/chrome.exe';
+    export CHROME_BIN='/mnt/c/Program Files/Google/Chrome/Application/chrome.exe';
     go_reactor;
     npm run test --path=$1
 }
@@ -123,47 +122,47 @@ function run_grc_tests() {
 
 # Run machete unit tests
 function run_machete_tests() {
-	go_machete;
+    go_machete;
     bin/remote bin/test $1
 }
 
 # Run machete integration tests
 function run_machete_integration_tests() {
-	go_machete;
+    go_machete;
     bin/remote bin/integration $1
 }
 
 # Run machete lint
 function run_machete_lint() {
-	go_machete;
+    go_machete;
     bin/remote bin/lint
 }
 
-# Run react lint
+# Run React lint
 function run_react_lint() {
-	go_reactor;
+    go_reactor;
     npm run lint --path=$1
 }
 
 # Run equalizer
 function run_equalizer() {
-	cd ~/code/docker-db;
-	bash common/equalize.sh;
+    cd ~/code/docker-db;
+    bash common/equalize.sh
 }
 
-# Init the sub repositories
+# Initialize the sub repositories
 function init_subrepos() {
-	go_v3;
+    go_v3;
     ./Scripts/subs init
 }
 
-# Updates the sub repositories
-function update_subrepos(){
-	go_v3;
+# Update the sub repositories
+function update_subrepos() {
+    go_v3;
     ./Scripts/subs update
 }
 
-# Updates the sub repositories (alternative)
+# Update the sub repositories (alternative)
 function update_subrepos_alt() {
     go_v3;
     git submodule update --init System/platform;
@@ -177,13 +176,13 @@ function update_subrepos_alt() {
     git submodule update --init System/web/wwwroot/ui/reactorCmps/dist;
     git submodule update --init System/web/wwwroot/common/images;
     git submodule update --init System/machete/dist;
-    git submodule update --init System/web/include/baseclass/dist;
+    git submodule update --init System/web/include/baseclass/dist
 }
 
 # Clean the sub repositories
 function clean_subrepos() {
-	perm;
-	go_v3;
+    perm;
+    go_v3;
     ./Scripts/subs clean
 }
 
@@ -223,28 +222,27 @@ function clean_subrepos_alt() {
 
 # Clean machete cache
 function clean_machete_cache() {
-	go_machete;
+    go_machete;
     bin/remote bin/clear-cache
 }
 
 # Swap database to SQL Server
-function swap_mssql(){
-    cp ~/code/docker-db/sqlserver/database_config.xml ~/code/SoftExpertExcellenceSuiteV3/System/conf/
-    cd ~/code/docker-db && bash mssql/scripts/stop.sh
+function swap_mssql() {
+    cp ~/code/docker-db/sqlserver/database_config.xml ~/code/SoftExpertExcellenceSuiteV3/System/conf/;
+    cd ~/code/docker-db && bash mssql/scripts/stop.sh;
     cd ~/code/docker-db && bash mssql/scripts/start.sh
 }
 
 # Swap database to Oracle
-function swap_oracle(){
-    cp ~/code/docker-db/oracle/database_config.xml ~/code/SoftExpertExcellenceSuiteV3/System/conf/
-    cd ~/code/docker-db && bash oracle/scripts/stop.sh
+function swap_oracle() {
+    cp ~/code/docker-db/oracle/database_config.xml ~/code/SoftExpertExcellenceSuiteV3/System/conf/;
+    cd ~/code/docker-db && bash oracle/scripts/stop.sh;
     cd ~/code/docker-db && bash oracle/scripts/start.sh
 }
 
 # Swap database to PostgreSQL
 function swap_pg() {
-    cp ~/code/docker-db/postgres/database_config.xml ~/code/SoftExpertExcellenceSuiteV3/System/conf/
-    cd ~/code/docker-db && bash postgres/scripts/stop.sh
+    cp ~/code/docker-db/postgres/database_config.xml ~/code/SoftExpertExcellenceSuiteV3/System/conf/;
+    cd ~/code/docker-db && bash postgres/scripts/stop.sh;
     cd ~/code/docker-db && bash postgres/scripts/start.sh
 }
-
