@@ -10,7 +10,7 @@ function help() {
             if [[ -n "$desc" ]]; then
                 printf "  %-35s - %s\n" "$fname" "$desc"
             else
-                printf "  %-15s - (no description)\n" "$fname"
+                printf "  %-35s - (no description)\n" "$fname"
             fi
             desc=""
         fi
