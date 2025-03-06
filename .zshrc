@@ -31,4 +31,4 @@ export NVM_DIR="$HOME/.nvm" # Set NVM (Node Version Manager) directory
 source "$NVM_DIR/nvm.sh" # Load NVM if the script exists
 
 # === Custom User Settings ===
-source ~/.zsh_aliases # Load custom aliases from a separate file
+source ~/.zshrc_aliases # Load custom aliases from a separate file
