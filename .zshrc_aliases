@@ -2,7 +2,7 @@
 function help() {
     echo "Available commands list:"
     echo "---------------------------------------------------------------------------------------"
-    grep -B1 '^function' ~/.zsh_aliases | grep -v '^--' | while read -r line; do
+    grep -B1 '^function' ~/.zshrc_aliases | grep -v '^--' | while read -r line; do
         if [[ "$line" =~ ^# ]]; then
             desc="${line#\# }"
         elif [[ "$line" =~ ^function ]]; then
