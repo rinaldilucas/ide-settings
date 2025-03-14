@@ -1,0 +1,27 @@
+{
+	"compilerOptions": {
+		"baseUrl": ".",
+		"paths": {
+			"reactorCmps/*": ["./reactorCmps/*"],
+			"reactor2/*": ["./reactor2/*"]
+		},
+		"jsx": "react",
+		"module": "ES6",
+		"target": "ES6",
+		"allowJs": true,
+		"checkJs": true,
+		"moduleResolution": "node"
+	},
+	"include": [
+		"./reactorCmps/src/**/*",
+		"./reactor2/**/*",
+		"./*.d.ts"
+	],
+	"exclude": [
+		"./node_modules/**/*",
+		"./reactorCmps/node_modules/**/*",
+		"./desktop",
+		"./native",
+		"./reactor"
+	]
+}
