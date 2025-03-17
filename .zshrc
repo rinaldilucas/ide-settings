@@ -16,7 +16,7 @@ source ~/.p10k.zsh # Load Powerlevel10k configuration
 
 # === Environment Variables ===
 export LANG=en_US.UTF-8 # Set language environment
-export NPM_REGISTRY_TOKEN={SECRET} # Set NPM registry authentication token
+export NPM_REGISTRY_TOKEN=xiBCK3rx1WTbXF_H2xsM # Set NPM registry authentication token
 export CHROME_BIN='/mnt/c/Program Files/Google/Chrome/Application/chrome.exe' # Configure Chrome binary for testing (WSL-specific path)
 
 # === Editor Settings ===
@@ -31,4 +31,4 @@ export NVM_DIR="$HOME/.nvm" # Set NVM (Node Version Manager) directory
 source "$NVM_DIR/nvm.sh" # Load NVM if the script exists
 
 # === Custom User Settings ===
-source ~/.zshrc_aliases # Load custom aliases from a separate file
+source ~/alias.zshrc # Load custom aliases from a separate file
