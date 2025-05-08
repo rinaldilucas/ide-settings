@@ -23,6 +23,16 @@ function up() {
     source ~/.zshrc
 }
 
+# Generate files tree
+function file_tree() {
+    find . -type f -exec sh -c 'echo "=== {} ==="; cat "{}"; echo ""; echo ""' \; > cat.txt 
+}
+
+# Generate files tree without test folder
+function file_tree_no_tests() {
+    find . -type f -not -path "./test/*" -exec sh -c 'echo "=== {} ==="; cat "{}"; echo ""; echo ""' \; > no_test.txt
+}
+
 # Show all running containers
 function show_containers() {
     docker ps -a --format "table {{.Names}}\t{{.Status}}"
@@ -31,6 +41,25 @@ function show_containers() {
 # Starts Docker
 function run_docker() {
     sudo service docker start
+}
+
+# Run commands to equalize the repo
+function run_pull_v3() {
+    go_v3;
+    ./Scripts/clean-dist
+    ./Scripts/subs update
+}
+
+# Run git auxiliary pull function
+function git_pull() {
+    cd ~/code/SoftExpertExcellenceSuiteV3/
+    git checkout .
+    git clean -fd
+    ./Scripts/clean-dist
+    git pull --all
+    ./Scripts/subs update
+    ./Scripts/hooks/post-checkout
+    git status
 }
 
 # Open .zshrc file
@@ -98,7 +127,7 @@ function dev_react_custom() {
 # Run FDA React development
 function dev_fda() {
     go_reactor;
-    npm run dev --path=process/ProcessModeler
+    npm run dev --path=causeAnalysisTools
 }
 
 # Run Maven history development

@@ -2,8 +2,9 @@
 	// Editor Formatting and Code Style
 	"editor.formatOnSave": false,
 	"editor.codeActionsOnSave": {
-		"source.organizeImports": "always",
-		"source.fixAll": "explicit"
+		"source.organizeImports": "never",
+		"source.fixAll": "explicit",
+		"source.fixAll.eslint": "explicit"
 	},
 	"editor.detectIndentation": false,
 	"editor.foldingImportsByDefault": false,
@@ -30,6 +31,9 @@
 		"editor.defaultFormatter": "esbenp.prettier-vscode",
 		"editor.formatOnSave": true
 	},
+	"[jsonc]": {
+		"editor.defaultFormatter": "vscode.json-language-features"
+	},
 
 	// Search and visibility
 	"search.exclude": {
@@ -37,12 +41,12 @@
 		"**/node_modules": true,
 		"**/web.config": true,
 		"package-lock.json": true,
+		"**/cat.txt": true
 	},
 	"files.exclude": {
 		"**/.git": true,
 		"**/bin": true,
 		"node_modules": true,
-		// "test/**": true //temporary
 	},
 	"files.watcherExclude": {
 		"**/.git/objects/**": true,
@@ -69,15 +73,62 @@
 	// ESLint Configuration
 	"eslint.options": {
 		"overrideConfig": {
+			"ignorePatterns": [
+				"local.d.ts"
+			],
 			"rules": {
+				"import/order": [
+					"error",
+					{
+						"groups": [
+							"external",
+							"internal",
+							[
+								"parent",
+								"sibling"
+							],
+							"index"
+						],
+						"pathGroups": [
+							{
+								"pattern": "{reactor2,reactorCmps}/**",
+								"group": "internal",
+								"position": "before"
+							},
+							{
+								"pattern": "./style*.{css,scss}",
+								"group": "index",
+								"position": "after"
+							}
+						],
+						"pathGroupsExcludedImportTypes": [
+							"builtin"
+						],
+						"newlines-between": "always",
+						"alphabetize": {
+							"order": "asc",
+							"caseInsensitive": true
+						}
+					}
+				],
+				"newline-after-var": 0,
 				"import/no-extraneous-dependencies": "off",
 				"no-mixed-imports": 0,
 				"no-reactor2": 0,
 				"no-setoken": 0,
 				"no-window": 0,
-				"jsx-quotes": ["error", "prefer-double"],
-				"quotes": ["error", "double"],
-				"object-curly-spacing": ["error", "always"],
+				"jsx-quotes": [
+					"error",
+					"prefer-double"
+				],
+				"quotes": [
+					"error",
+					"double"
+				],
+				"object-curly-spacing": [
+					"error",
+					"always"
+				],
 				"no-multiple-empty-lines": [
 					"error",
 					{
@@ -90,13 +141,13 @@
 		}
 	},
 	"eslint.enable": true,
+	"eslint.format.enable": true,
 	"eslint.validate": [
 		"javascript",
 		"javascriptreact",
 		"typescript",
 		"typescriptreact"
 	],
-	"eslint.format.enable": true,
 
 	// Editor Interaction and Assistance
 	"editor.hover.enabled": true,
@@ -142,11 +193,15 @@
 	"gitlens.defaultDateShortFormat": "D/MM/YY",
 	"gitlens.defaultTimeFormat": "HH:m",
 	"gitlens.views.stashes.files.layout": "list",
+	"git.confirmSync": false,
+	"git.suggestSmartCommit": false,
 
 	// Language-Specific Settings
 	"emmet.triggerExpansionOnTab": true,
 	"javascript.suggest.enabled": true,
 	"javascript.suggest.autoImports": true,
+	"javascript.suggest.completeJSDocs": true,
+	"javascript.suggest.paths": true,
 	"javascript.updateImportsOnFileMove.enabled": "always",
 	"typescript.updateImportsOnFileMove.enabled": "always",
 	"javascript.preferences.importModuleSpecifier": "relative",
@@ -161,7 +216,31 @@
 	"phpunit.phpunit": "/tmp/phpunit.phar",
 
 	// Terminal and Environment
-	"terminal.integrated.defaultProfile.windows": "PowerShell",
+	"terminal.integrated.profiles.windows": {
+		"PowerShell": {
+			"source": "PowerShell",
+			"icon": "terminal-powershell"
+		},
+		"Command Prompt": {
+			"path": [
+				"${env:windir}\\Sysnative\\cmd.exe",
+				"${env:windir}\\System32\\cmd.exe"
+			],
+			"args": [],
+			"icon": "terminal-cmd"
+		},
+		"Git Bash": {
+			"source": "Git Bash"
+		},
+		"Ubuntu (WSL)": {
+			"path": "C:\\WINDOWS\\System32\\wsl.exe",
+			"args": [
+				"-d",
+				"Ubuntu"
+			]
+		}
+	},
+	"terminal.integrated.defaultProfile.windows": "Ubuntu (WSL)",
 	"terminal.integrated.env.windows": {},
 	"terminal.integrated.persistentSessionReviveProcess": "never",
 	"termPreview.absolutePathToTermsRoot": "/root/code/SoftExpertExcellenceSuiteV3/System/web/include/language/LC_MESSAGES",
@@ -189,10 +268,10 @@
 	"debug.onTaskErrors": "abort",
 	"diffEditor.ignoreTrimWhitespace": false,
 	"diffEditor.renderSideBySide": true,
-	"window.zoomLevel": 1,
+	"editor.accessibilitySupport": "off",
 	"security.workspace.trust.untrustedFiles": "open",
-	"git.confirmSync": false,
-	"[jsonc]": {
-		"editor.defaultFormatter": "vscode.json-language-features"
-	},
+	"window.zoomLevel": 1,
+	"security.allowedUNCHosts": [
+		"wsl.localhost"
+	],
 }

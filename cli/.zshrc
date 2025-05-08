@@ -16,8 +16,8 @@ source ~/.p10k.zsh # Load Powerlevel10k configuration
 
 # === Environment Variables ===
 export LANG=en_US.UTF-8 # Set language environment
-export NPM_REGISTRY_TOKEN={TOKEN} # Set NPM registry authentication token
-export CHROME_BIN='/mnt/c/Program Files/Google/Chrome/Application/chrome.exe' # Configure Chrome binary for testing (WSL-specific path)
+export NPM_REGISTRY_TOKEN=XXXXXX # Set NPM registry authentication token
+export CHROME_BIN='/mnt/c/Program Files (x86)/Microsoft/Edge/Application/msedge.exe' # Configure Chrome binary for testing (WSL-specific path)
 
 # === Editor Settings ===
 if [[ -n $SSH_CONNECTION ]]; then
@@ -32,3 +32,6 @@ source "$NVM_DIR/nvm.sh" # Load NVM if the script exists
 
 # === Custom User Settings ===
 source ~/alias.zshrc # Load custom aliases from a separate file
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
