@@ -1,23 +1,15 @@
 {
 	"compilerOptions": {
-		"baseUrl": ".",
-		"paths": {
-			"reactorCmps/*": ["../../*"],
-			"reactor2/*": ["../../../reactor2/*"]
-		},
+		"baseUrl": "../../../",
 		"jsx": "react",
 		"module": "ES6",
 		"target": "ES6",
 		"allowJs": true,
 		"checkJs": true,
-		"moduleResolution": "node"
+		"moduleResolution": "node",
+		"typeRoots": ["./node_modules/@types", "/root/.nvm/versions/node/v22.12.0/lib/node_modules/@types"],
+		"types": ["jest", "node"]
 	},
-	"include": [
-		"./**/*",
-		"../../../../*.d.ts"
-	],
-	"exclude": [
-		"../../../../node_modules/**/*",
-		"../../node_modules/**/*"
-	]
+	"include": ["./**/*", "../../../../*.d.ts"],
+	"exclude": ["../../../../node_modules/**/*", "../../node_modules/**/*"]
 }
