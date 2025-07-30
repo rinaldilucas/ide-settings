@@ -2,7 +2,7 @@
 	// Editor Formatting and Code Style
 	"editor.formatOnSave": false,
 	"editor.codeActionsOnSave": {
-		"source.organizeImports": "never",
+		"source.organizeImports": "explicit",
 		"source.fixAll": "explicit",
 		"source.fixAll.eslint": "explicit"
 	},
@@ -34,6 +34,12 @@
 	"[jsonc]": {
 		"editor.defaultFormatter": "vscode.json-language-features"
 	},
+	"[php]": {
+		"editor.formatOnSave": true,
+		"editor.insertSpaces": true,
+  		"editor.tabSize": 4,
+    	"editor.defaultFormatter": "bmewburn.vscode-intelephense-client",
+	},
 
 	// Search and visibility
 	"search.exclude": {
@@ -41,7 +47,8 @@
 		"**/node_modules": true,
 		"**/web.config": true,
 		"package-lock.json": true,
-		"**/cat.txt": true
+		"**/cat.txt": true,
+		"**/no_test.txt": true
 	},
 	"files.exclude": {
 		"**/.git": true,
@@ -193,11 +200,11 @@
 	"gitlens.defaultDateShortFormat": "D/MM/YY",
 	"gitlens.defaultTimeFormat": "HH:m",
 	"gitlens.views.stashes.files.layout": "list",
+	"gitlens.codeLens.scopes": ["document"],
 	"git.confirmSync": false,
 	"git.suggestSmartCommit": false,
 
 	// Language-Specific Settings
-	"emmet.triggerExpansionOnTab": true,
 	"javascript.suggest.enabled": true,
 	"javascript.suggest.autoImports": true,
 	"javascript.suggest.completeJSDocs": true,
@@ -208,12 +215,16 @@
 	"typescript.preferences.importModuleSpecifier": "relative",
 
 	// PHPUnit Testing
-	"phpunit.command": "docker exec -t -w /usr/local/se/web se-baseclass php",
-	"phpunit.docker.container": "se-baseclass",
-	"phpunit.paths": {
-		"${workspaceFolder}": "/usr/local/se/web/"
-	},
+	"phpunit.command": "docker exec -t -e XDEBUG_MODE=debug -w /usr/local/se/web/ se-baseclass ${php} ${phpargs} ${phpunit} ${phpunitargs}",
+	"phpunit.php": "php",
 	"phpunit.phpunit": "/tmp/phpunit.phar",
+	"phpunit.args": [
+		"tests/include/exp/analysistools/",
+		"--no-coverage"
+	],
+	"phpunit.paths": {
+		"${workspaceFolder}": "/usr/local/se/web/tests/include/exp/analysistools/"
+	},
 
 	// Terminal and Environment
 	"terminal.integrated.profiles.windows": {
@@ -260,7 +271,6 @@
 	"workbench.colorTheme": "Default Dark Modern",
 	"workbench.editor.enablePreview": false,
 	"workbench.iconTheme": "material-icon-theme",
-	"workbench.layoutControl.enabled": false,
 	"workbench.startupEditor": "newUntitledFile",
 
 	// General Editor Behavior
@@ -270,8 +280,24 @@
 	"diffEditor.renderSideBySide": true,
 	"editor.accessibilitySupport": "off",
 	"security.workspace.trust.untrustedFiles": "open",
-	"window.zoomLevel": 1,
 	"security.allowedUNCHosts": [
 		"wsl.localhost"
 	],
+	"supermaven.allowGitignore": true,
+	"supermaven.enable": {
+		"*": true
+	},
+	"[typescriptreact]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"[typescript]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"codeium.enableConfig": {
+		"*": true,
+		"plaintext": true
+	},
+	"remote.autoForwardPortsSource": "hybrid",
+	"workbench.layoutControl.enabled": false,
+	"window.zoomLevel": 1
 }
