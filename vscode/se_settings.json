@@ -215,15 +215,15 @@
 	"typescript.preferences.importModuleSpecifier": "relative",
 
 	// PHPUnit Testing
-	"phpunit.command": "docker exec -t -e XDEBUG_MODE=debug -w /usr/local/se/web/ se-baseclass ${php} ${phpargs} ${phpunit} ${phpunitargs}",
+	"phpunit.command": "docker exec -t -e XDEBUG_MODE=coverage -w /usr/local/se/web/ se-baseclass ${php} ${phpargs} ${phpunit} ${phpunitargs}",
 	"phpunit.php": "php",
 	"phpunit.phpunit": "/tmp/phpunit.phar",
 	"phpunit.args": [
-		"tests/include/exp/analysistools/",
-		"--no-coverage"
+		"--no-coverage",
+		"--display-deprecations"
 	],
 	"phpunit.paths": {
-		"${workspaceFolder}": "/usr/local/se/web/tests/include/exp/analysistools/"
+		"${workspaceFolder}": "/usr/local/se/web/tests/include/exp/analysistools"
 	},
 
 	// Terminal and Environment
