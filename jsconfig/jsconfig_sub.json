@@ -1,6 +1,6 @@
 {
 	"compilerOptions": {
-		"baseUrl": "../../../",
+		"baseUrl": ".",
 		"jsx": "react",
 		"module": "ES6",
 		"target": "ES6",
@@ -8,8 +8,41 @@
 		"checkJs": true,
 		"moduleResolution": "node",
 		"typeRoots": ["./node_modules/@types", "/root/.nvm/versions/node/v22.12.0/lib/node_modules/@types"],
-		"types": ["jest", "node"]
+		"types": ["jest", "node"],
+		"paths": {
+			"SG2/*": ["../../../node_modules/@framework-front/sg2/src/*"],
+			"Base/*": ["../../../node_modules/@framework-front/sg2/src/*"],
+			"Utils": ["../../../node_modules/@framework-front/core/src/Utils"],
+			"WorkspaceInfo": ["../../../node_modules/@framework-front/core/src/WorkspaceInfo"],
+			"Connector": ["../../../node_modules/@framework-front/core/src/Connector"],
+			"reactor2/*": ["../../../reactor2/*"],
+			"reactorCmps/*": ["../../../reactorCmps/*"]
+			// "RegionalOpts/*": ["node_modules/@framework-front/core/src/*"],
+			// "crossMessaging/*": ["node_modules/@framework-front/core/src/*"],
+			// "IdentifiedConnector/*": ["node_modules/@framework-front/core/src/*"],
+			// "identifiedPromisesManager/*": ["node_modules/@framework-front/core/src/*"],
+			// "Storage/*": ["node_modules/@framework-front/core/src/*"],
+			// "SEDataLoader/*": ["node_modules/@framework-front/core/src/*"],
+			// "UserPhoto/*": ["node_modules/@framework-front/core/src/*"],
+			// "LogoDefault/*": ["node_modules/@framework-front/core/src/*"],
+			// "MessageBar/*": ["node_modules/@framework-front/core/src/*"],
+			// "DeviceDetect/*": ["node_modules/@framework-front/core/src/*"],
+			// "ProductInfo/*": ["node_modules/@framework-front/core/src/*"],
+			// "SystemInfo/*": ["node_modules/@framework-front/core/src/*"],
+			// "CookieHandler/*": ["node_modules/@framework-front/core/src/*"],
+			// "Token/TokenData/*": ["node_modules/@framework-front/core/src/*"],
+			// "Token/TokenHandler/*": ["node_modules/@framework-front/core/src/*"],
+			// "Token/TokenHelper/*": ["node_modules/@framework-front/core/src/*"],
+			// "CounterSign/CounterSignHandler/*": ["node_modules/@framework-front/core/src/*"],
+			// "Formatters/*": ["node_modules/@framework-front/formatters/src/*"],
+			// "Math/*": ["node_modules/@framework-front/math/src/*"],
+			// "internal-react": ["node_modules/react"],
+			// "react": ["rspack/wrappers/react-wrapper"],
+			// "when": ["node_modules/@framework-front/when"],
+			// "PromiseHelper": ["node_modules/@framework-front/promise-helper"],
+			// "bignumberlib": ["node_modules/bignumber.js/bignumber.js"]
+		}
 	},
-	"include": ["./**/*", "../../../../*.d.ts"],
-	"exclude": ["../../../../node_modules/**/*", "../../node_modules/**/*"]
+	"include": ["./**/*"],
+	"exclude": ["../../../node_modules/**/*"]
 }
